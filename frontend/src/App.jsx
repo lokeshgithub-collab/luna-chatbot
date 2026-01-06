@@ -168,12 +168,16 @@ function App() {
     setIsLoading(true);
 
     try {
-      const response = await axios.post('http://localhost:8000/chat', {
-        sessionId: sessionId,
-        message: messageText,
-      }, {
-        signal: abortControllerRef.current.signal 
-      });
+     const response = await axios.post(
+  `${import.meta.env.VITE_API_URL}/chat`,
+  {
+    sessionId: sessionId,
+    message: messageText,
+  },
+  {
+    signal: abortControllerRef.current.signal
+  }
+);
 
       const lunaReply = { role: 'assistant', content: response.data.reply };
       
